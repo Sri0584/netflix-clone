@@ -9,13 +9,100 @@
 			content="A Netflix-like streaming platform clone built with React"
 		/>
 		<!-- Performance optimizations -->
+		<link
+			rel="preload"
+			as="image"
+			href="/src/assets/poster-1280.webp"
+			imagesrcset="/src/assets/poster-640.webp 640w, /src/assets/poster-960.webp 960w, /src/assets/poster-1280.webp 1280w, /src/assets/poster-1920.webp 1920w"
+			imagesizes="100vw"
+			fetchpriority="high"
+			type="image/webp"
+		/>
 		<link rel="preconnect" href="https://api.themoviedb.org" crossorigin />
 		<link rel="preconnect" href="https://image.tmdb.org" crossorigin />
 		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 		<title>netflix-clone</title>
 	</head>
 	<body>
-		<div id="root"></div>
+		<div id="root" data-prerender-route="/">
+			<a href="#main-content" class="sr-only">Skip to main content</a>
+			<header
+				class="relative top-0 left-0 right-0 z-[100] py-5 bg-gradient-to-b from-black/80 to-transparent"
+			>
+				<div class="px-6 md:px-6 flex justify-between items-center b">
+					<div class="flex-shrink-0">
+						<a href="/" class="text-xl lg:text-4xl font-bold text-red-600">REACTFLIX</a>
+					</div>
+					<div class="flex items-center gap-2">
+						<button aria-label="Toggle search" class="p-2 bg-gray-700 rounded transition">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="text-white"
+							>
+								<circle cx="11" cy="11" r="8"></circle>
+								<path d="m21 21-4.3-4.3"></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</header>
+			<main id="main-content">
+				<main>
+					<div class="min-h-screen bg-background text-foreground transition-colors duration-300">
+						<section class="relative min-h-[80vh] md:h-screen w-full overflow-hidden bg-black">
+							<img
+								src="/src/assets/poster-1280.webp"
+								srcset="/src/assets/poster-640.webp 640w, /src/assets/poster-960.webp 960w, /src/assets/poster-1280.webp 1280w, /src/assets/poster-1920.webp 1920w"
+								sizes="100vw"
+								width="1920"
+								height="1080"
+								alt="poster background"
+								loading="eager"
+								fetchpriority="high"
+								class="absolute inset-0 w-full h-full object-cover"
+							/>
+							<div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+							<div
+								class="absolute inset-0 flex flex-col justify-center items-center p-8 md:p-12 text-white"
+							>
+								<h1
+									class="text-3xl md:text-5xl font-bold text-white mb-4 max-w-2xl text-center"
+								>
+									Unlimited movies, TV shows, and more.
+								</h1>
+								<p
+									class="text-sm md:text-lg text-gray-200 mb-6 max-w-xl line-clamp-3 text-center"
+								>
+									Watch anywhere. Cancel anytime.
+								</p>
+								<div class="sm:px-3 px-0 w-full flex justify-center">
+									<button
+										aria-label="Play button: Restart your membership"
+										class="bg-red-500 m-3 text-black sm:px-3 px-8 py-2 rounded font-semibold hover:bg-gray-300 transition flex items-center gap-2"
+									>
+										Restart your membership
+									</button>
+								</div>
+							</div>
+						</section>
+						<div role="status" class="px-6 mt-6 py-12 text-center text-gray-400">
+							<div
+								class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-red-500"
+							></div>
+							<p class="mt-4">Loading movies...</p>
+						</div>
+					</div>
+				</main>
+			</main>
+		</div>
 		<script type="module" src="/src/main.tsx"></script>
 	</body>
 </html>
