@@ -16,7 +16,7 @@ const useSearchMovies = create<SearchMovies>((set) => ({
 	setResults: (r: Movie[]) => set({ results: r }),
 	performSearch: (q: string) => {
 		console.log(q, "q");
-		set({ query: q });
+		set({ query: q.trim() });
 		const qTrim = q.trim();
 		if (qTrim === "") {
 			set({ results: [] });
