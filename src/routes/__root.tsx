@@ -6,8 +6,11 @@ import Header from "../components/Header";
 export const Route = createRootRoute({
 	component: () => (
 		<>
+			<a href='#main-content' className='sr-only'>Skip to main content</a>
 			<Header />
-			<Outlet />
+			<main id='main-content'>
+				<Outlet />
+			</main>
 			<TanStackDevtools
 				config={{
 					position: "bottom-left",
@@ -21,4 +24,8 @@ export const Route = createRootRoute({
 			/>
 		</>
 	),
+	errorComponent: ({ error }) => (
+		<div>Something went wrong: {error.message}</div>
+	),
+	notFoundComponent: () => <div>Page not found,404</div>,
 });

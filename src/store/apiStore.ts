@@ -23,9 +23,13 @@ const useSearchMovies = create<SearchMovies>((set) => ({
 			return;
 		}
 		const baseMovies = useBaseMovies.getState().baseMovies;
-		const filteredMovies: Movie[] = baseMovies?.filter((movie: Movie) =>
-			movie.title.toLowerCase().includes(qTrim.toLowerCase()),
-		);
+		const filteredMovies: Movie[] = baseMovies?.filter((movie: Movie) => {
+			console.log(movie.title.toLowerCase(), qTrim.toLowerCase());
+
+			return movie.title.toLowerCase().includes(qTrim.toLowerCase());
+		});
+		console.log(baseMovies, filteredMovies);
+
 		set({ results: filteredMovies });
 	},
 }));

@@ -8,6 +8,7 @@ const SearchBar = () => {
 	const [showInput, setShowInput] = useState(false);
 	const [isPending, startTransition] = useTransition();
 	const { setQuery, query } = useSearchMovies();
+	console.log(query, "query");
 
 	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const handleBlur = () => {
@@ -41,8 +42,13 @@ const SearchBar = () => {
 		<div className='flex items-center gap-2'>
 			{showInput ?
 				<>
+					<label htmlFor='search-input' className='sr-only'>
+						Search movies
+					</label>
 					<input
+						id='search-input'
 						type='text'
+						aria-label='Search movies'
 						placeholder='Search movies...'
 						className='w-full px-3 py-2 placeholder:text-gray-500 border border-gray-500 rounded focus:outline-none focus:border-blue-500'
 						onChange={handleSearchQueryChange}
@@ -53,6 +59,7 @@ const SearchBar = () => {
 					/>
 					<button
 						onClick={handleCloseInput}
+						aria-label='Clear search'
 						className='p-2 bg-gray-700 rounded transition'
 					>
 						{isPending ?
@@ -60,8 +67,7 @@ const SearchBar = () => {
 						:	<X size={20} className='text-white' />}
 					</button>
 				</>
-			:	<button
-					onClick={() => setShowInput(true)}
+			:	<button					aria-label='Toggle search'					onClick={() => setShowInput(true)}
 					className='p-2 bg-gray-700 rounded transition'
 				>
 					<Search size={20} className='text-white' />

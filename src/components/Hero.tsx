@@ -19,7 +19,7 @@ const Hero: React.FC<HeroProps> = ({
 			<img
 				loading='lazy'
 				src={backgroundImage}
-				alt='Hero background'
+				alt='Netflix streaming service hero background'
 				width={1920}
 				height={1080}
 				className='absolute inset-0 w-full h-full object-cover'
@@ -38,6 +38,7 @@ const Hero: React.FC<HeroProps> = ({
 				<div className='sm:px-3 px-0 w-full flex justify-center'>
 					<button
 						onClick={onPlayClick}
+						aria-label='Play button: Restart your membership'
 						className='bg-red-500 m-3 text-black sm:px-3 px-8 py-2 rounded font-semibold hover:bg-gray-300 transition flex items-center gap-2'
 					>
 						Restart your membership

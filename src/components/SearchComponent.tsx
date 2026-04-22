@@ -14,8 +14,18 @@ export default function SearchComponent() {
 	}, [movie, performSearch]);
 
 	return (
-		<div className='min-h-screen bg-background text-foreground transition-colors duration-300 flex items-center justify-center flex-col p-8'>
-			<h1 className='text-3xl font-bold'>Search Page</h1>
+		<div className='container relative mx-auto mt-6 max-w-6xl px-6'>
+			<h2 className='text-3xl font-bold'>Search Results for "{movie}"</h2>
+			<div
+				className='sr-only'
+				role='status'
+				aria-atomic='true'
+				aria-live='polite'
+			>
+				{results.length > 0 ?
+					`Search results for: ${movie} are ${results.length} movies.`
+				:	"No results found"}
+			</div>
 			{results.length > 0 ?
 				<div className='mt-8 p-8 grid grid-cols-fluid gap-6'>
 					{results.map((movie, index) => (
