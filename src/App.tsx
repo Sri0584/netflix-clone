@@ -4,7 +4,9 @@ import Hero from "./components/Hero";
 import useFetch from "./hooks/useFetch";
 const TrendingNow = React.lazy(() => import("./components/TrendingNow"));
 function App() {
-	const { movies, error, loading } = useFetch();
+	const { movies, error, loading } = useFetch({
+		deferUntilIdle: true,
+	});
 
 	if (error) return <div>Error: {error}</div>;
 
