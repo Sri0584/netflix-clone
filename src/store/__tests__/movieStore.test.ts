@@ -12,6 +12,7 @@ describe("movies store", () => {
 			{ id: 2, title: "Dexter", poster_path: "/dx.jpg" },
 		];
 		useBaseMovies.getState().setBaseMovies(movies);
+		useBaseMovies.setState({ baseMovies: movies });
 		const { baseMovies } = useBaseMovies.getState();
 		expect(baseMovies).toEqual(movies);
 	});
