@@ -16,17 +16,33 @@ const useFetch = () => {
 					setLoading(false);
 					return;
 				}
+
+				// Add timeout to prevent indefinite waiting
+				const controller = new AbortController();
+				const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
 				const res = await fetch(import.meta.env.VITE_API_URL, {
 					headers: {
 						accept: "application/json",
 						Authorization: `Bearer ${token}`,
 					},
+					signal: controller.signal,
+					priority: 'high' as RequestInit['priority'],
 				});
+
+				clearTimeout(timeoutId);
+
+				if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+
 				const data = (await res.json()) as TMDBResponse;
 				setMovies(data.results);
 				setBaseMovies(data.results);
 			} catch (error) {
-				setError((error as Error).message);
+				if (error instanceof Error && error.name === 'AbortError') {
+					setError("Request timeout. Please try again.");
+				} else {
+					setError((error as Error).message);
+				}
 			} finally {
 				setLoading(false);
 			}

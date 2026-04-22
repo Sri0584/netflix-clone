@@ -1,13 +1,37 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netflix-clone</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="A Netflix-like streaming platform clone built with React"
+		/>
+		<!-- Performance optimizations -->
+		<link rel="preconnect" href="https://api.themoviedb.org" crossorigin />
+		<link rel="preconnect" href="https://image.tmdb.org" crossorigin />
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+		<link
+			rel="preload"
+			fetchpriority="high"
+			as="image"
+			href="/assets/poster-960-DJWXd6aA.webp"
+			type="image/webp"
+		/>
+		<link
+			rel="preload"
+			href="/assets/index-i9HQ8qhW.css"
+			as="style"
+			onload="
+				this.onload = null;
+				this.rel = 'stylesheet';
+			"
+		/>
+		<title>netflix-clone</title>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script type="module" src="/src/main.tsx"></script>
+	</body>
 </html>

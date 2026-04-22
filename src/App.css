@@ -1,0 +1,65 @@
+.movieNum {
+	position: absolute;
+	z-index: 2;
+	padding: 0;
+	border: none;
+	border-radius: 0.5rem;
+	-webkit-transition: -webkit-transform 0.2s ease-in-out;
+	transition: transform 0.2s ease-in-out;
+	cursor: pointer;
+	bottom: 0.1rem;
+	left: -0.625rem;
+	line-height: 1;
+	display: inline-block;
+	height: 1em;
+	font-weight: 700;
+	color: rgb(65, 65, 65);
+	-webkit-text-stroke: 0.15rem rgb(255, 255, 255);
+	text-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+}
+.movieNum::before {
+	/* content: attr(data-content); */
+	-webkit-text-fill-color: rgb(0, 0, 0);
+	-webkit-text-stroke: 0;
+	position: absolute;
+}
+@media (min-width: 960px) {
+	.movieNum {
+		font-size: 5rem;
+		bottom: 0rem;
+		left: 0.5rem;
+	}
+}
+/* Hide scrollbar while allowing scrolling */
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none; /* Chrome, Safari and Opera */
+}
+
+.md\:h-screen {
+	@media (width >= 48rem) {
+		height: 80vh;
+	}
+}
+
+body {
+	margin: 0;
+	box-sizing: border-box;
+	padding: 2px;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
