@@ -1,8 +1,20 @@
 import React from "react";
+import { preload } from "react-dom";
 import poster640 from "@/assets/poster-640.webp";
 import poster960 from "@/assets/poster-960.webp";
 import poster1280 from "@/assets/poster-1280.webp";
 import poster1920 from "@/assets/poster-1920.webp";
+
+
+const posterSrcSet = `${poster640} 640w, ${poster960} 960w, ${poster1280} 1280w, ${poster1920} 1920w`;
+
+preload(poster1280, {
+	as: "image",
+	fetchPriority: "high",
+	imageSrcSet: posterSrcSet,
+	imageSizes: "100vw",
+	type: "image/webp",
+});
 
 interface posterProps {
 	title?: string;
@@ -19,12 +31,7 @@ const poster: React.FC<posterProps> = ({
 		<section className='relative min-h-[80vh] md:h-screen w-full overflow-hidden bg-black'>
 			<img
 				src={poster1280}
-				srcSet={`
-					${poster640} 640w,
-					${poster960} 960w,
-					${poster1280} 1280w,
-					${poster1920} 1920w
-					`}
+				srcSet={posterSrcSet}
 				sizes='100vw'
 				width={1920}
 				height={1080}
