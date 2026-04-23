@@ -38,6 +38,8 @@ const MovieCard = ({ movie, index = 0 }: MovieCardProps) => {
 					alt={movie.title}
 					className='w-full h-full object-cover'
 					loading='lazy'
+					width={300}
+					height={450}
 				/>
 				<span className='movieNum'>{(index + 1).toString()}</span>
 			</Card>

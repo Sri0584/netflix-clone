@@ -2,13 +2,18 @@ import { useEffect, useRef } from "react";
 import MoviesList from "./MoviesList";
 import useInfiniteMovies from "@/hooks/useInfiniteMovies";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import useBaseMovies from "@/store/movieStore";
 
 const TrendingNow = () => {
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 	const endRef = useRef<HTMLDivElement | null>(null);
-
+	const { setBaseMovies } = useBaseMovies();
 	const { movies, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
 		useInfiniteMovies();
+
+	useEffect(() => {
+		setBaseMovies(movies);
+	}, [movies, setBaseMovies]);
 
 	const handleLeftScroll = () => {
 		scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
@@ -55,12 +60,13 @@ const TrendingNow = () => {
 			<h2>Trending Now</h2>
 
 			{isLoading ?
-				<div
-					role='status'
-					className='px-6 mt-6 py-12 text-center text-gray-400'
-				>
-					<div className='inline-block h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-red-500'></div>
-					<p className='mt-4'>Loading movies...</p>
+				<div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+					{Array.from({ length: 8 }).map((_, i) => (
+						<div
+							key={i}
+							className='aspect-[2/3] rounded-lg bg-gray-800 animate-pulse'
+						/>
+					))}
 				</div>
 			: movies.length > 0 ?
 				<>

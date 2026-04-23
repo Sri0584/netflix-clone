@@ -27,7 +27,7 @@ export default function SearchComponent() {
 				:	"No results found"}
 			</div>
 			{results.length > 0 ?
-				<div className='mt-8 p-8 grid grid-cols-fluid gap-6'>
+				<div className='mt-8 p-8 grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-6'>
 					{results.map((movie, index) => (
 						<MovieCard key={movie.id} movie={movie} index={index} />
 					))}

@@ -8,6 +8,7 @@ async function fetchMoviesPage(
 	token: string,
 ): Promise<TMDBResponse> {
 	const url = `${import.meta.env.VITE_API_URL_ALLPAGES}&page=${page.toString()}`;
+
 	const res = await fetch(url, {
 		headers: {
 			accept: "application/json",
@@ -16,6 +17,7 @@ async function fetchMoviesPage(
 	});
 
 	if (!res.ok) throw new Error("Failed to fetch movies");
+
 	return (await res.json()) as TMDBResponse;
 }
 
@@ -48,7 +50,6 @@ const useInfiniteMovies = () => {
 		isLoading,
 		isFetchingNextPage,
 		hasNextPage,
-
 		fetchNextPage,
 	};
 };

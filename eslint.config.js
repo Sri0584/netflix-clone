@@ -17,6 +17,10 @@ export default defineConfig([
 			// Optionally, add this for stylistic rules
 			tseslint.configs.stylisticTypeChecked,
 			reactRefresh.configs.vite,
+			// Enable lint rules for React
+			reactX.configs["recommended-typescript"],
+			// Enable lint rules for React DOM
+			reactDom.configs.recommended,
 		],
 		languageOptions: {
 			parserOptions: {
