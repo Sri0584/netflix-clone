@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { ClerkProvider } from "@clerk/react";
@@ -8,7 +8,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-// Create a new router instance
 const router = createRouter({
 	routeTree,
 	context: {},
@@ -17,28 +16,26 @@ const router = createRouter({
 	defaultStructuralSharing: true,
 	defaultPreloadStaleTime: 0,
 });
-// Register the router instance for type safety
+
 declare module "@tanstack/react-router" {
 	interface Register {
 		router: typeof router;
 	}
 }
+
 const queryClient = new QueryClient();
 const rootElement = document.getElementById("root");
-if (rootElement) {
-	const app = (
-		<StrictMode>
-			<ClerkProvider publishableKey={publishableKey} afterSignOutUrl='/'>
-				<QueryClientProvider client={queryClient}>
-					<RouterProvider router={router} />
-				</QueryClientProvider>
-			</ClerkProvider>
-		</StrictMode>
-	);
 
-	if (rootElement.innerHTML.trim().length > 0) {
-		hydrateRoot(rootElement, app);
-	} else {
-		createRoot(rootElement).render(app);
-	}
+if (!rootElement) {
+	throw new Error("Root element not found");
 }
+
+createRoot(rootElement).render(
+	<StrictMode>
+		<ClerkProvider publishableKey={publishableKey} afterSignOutUrl='/'>
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
+		</ClerkProvider>
+	</StrictMode>,
+);
