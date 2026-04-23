@@ -2,7 +2,11 @@ import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { ClerkProvider } from "@clerk/react";
 import { routeTree } from "./routeTree.gen.ts";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 // Create a new router instance
 const router = createRouter({
@@ -19,11 +23,16 @@ declare module "@tanstack/react-router" {
 		router: typeof router;
 	}
 }
+const queryClient = new QueryClient();
 const rootElement = document.getElementById("root");
 if (rootElement) {
 	const app = (
 		<StrictMode>
-			<RouterProvider router={router} />
+			<ClerkProvider publishableKey={publishableKey} afterSignOutUrl='/'>
+				<QueryClientProvider client={queryClient}>
+					<RouterProvider router={router} />
+				</QueryClientProvider>
+			</ClerkProvider>
 		</StrictMode>
 	);
 
