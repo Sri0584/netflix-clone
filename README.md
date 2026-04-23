@@ -1,3 +1,4 @@
+A Netflix clone app with  # React + TypeScript + Vite + Tanstack Router(routes+infinite query) + clerk authentication
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
