@@ -7,7 +7,7 @@ async function fetchMoviesPage(
 	page: number,
 	token: string,
 ): Promise<TMDBResponse> {
-	const url = `${import.meta.env.VITE_API_URL_ALLPAGES}&page=${page}`;
+	const url = `${import.meta.env.VITE_API_URL_ALLPAGES}&page=${page.toString()}`;
 	const res = await fetch(url, {
 		headers: {
 			accept: "application/json",
@@ -25,7 +25,7 @@ const useInfiniteMovies = () => {
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
 		useInfiniteQuery({
 			queryKey: ["infinite-movies"],
-			queryFn: async ({ pageParam = 1 }) => {
+			queryFn: async ({ pageParam }) => {
 				if (!token) {
 					return { page: 1, results: [], total_pages: 0, total_results: 0 };
 				}

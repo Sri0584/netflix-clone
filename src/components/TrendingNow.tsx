@@ -24,7 +24,6 @@ const TrendingNow = () => {
 	useEffect(() => {
 		const root = scrollRef.current;
 		const target = endRef.current;
-		console.log(root);
 
 		if (!root || !target) return;
 
@@ -34,7 +33,7 @@ const TrendingNow = () => {
 				console.log(firstEntry);
 
 				if (firstEntry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-					fetchNextPage();
+					void fetchNextPage();
 				}
 			},
 			{
@@ -46,7 +45,9 @@ const TrendingNow = () => {
 
 		observer.observe(target);
 
-		return () => observer.disconnect();
+		return () => {
+			observer.disconnect();
+		};
 	}, [hasNextPage, isFetchingNextPage, fetchNextPage, movies.length]);
 
 	return (

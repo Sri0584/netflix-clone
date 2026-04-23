@@ -25,7 +25,7 @@ const SearchBar = () => {
 		// Set new debounced search with useTransition
 		timeoutRef.current = setTimeout(() => {
 			startTransition(() => {
-				navigate({ to: "/search", search: { movie: e.target.value } });
+				void navigate({ to: "/search", search: { movie: e.target.value } });
 			});
 		}, 1000);
 	};
@@ -34,8 +34,12 @@ const SearchBar = () => {
 		setShowInput(false);
 		startTransition(() => {
 			setQuery("");
-			navigate({ to: "/" });
+			void navigate({ to: "/" });
 		});
+	};
+
+	const handleToggleSearch = () => {
+		setShowInput((prev) => !prev);
 	};
 
 	return (
@@ -67,7 +71,9 @@ const SearchBar = () => {
 						:	<X size={20} className='text-white' />}
 					</button>
 				</>
-			:	<button					aria-label='Toggle search'					onClick={() => setShowInput(true)}
+			:	<button
+					aria-label='Toggle search'
+					onClick={handleToggleSearch}
 					className='p-2 bg-gray-700 rounded transition'
 				>
 					<Search size={20} className='text-white' />

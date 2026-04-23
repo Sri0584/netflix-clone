@@ -1,12 +1,12 @@
-export type Movie = {
+export interface Movie {
 	id: number;
 	title: string;
 	poster_path: string;
-};
+}
 
-export type MovieListProps = {
+export interface MovieListProps {
 	movies: Movie[];
-};
+}
 
 export interface TMDBResponse {
 	page: number;
